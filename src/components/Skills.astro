@@ -1,5 +1,18 @@
 ---
+import { skills } from "@cv";
 
 ---
 
-<h1>Skills por aca</h1>
+<section>
+    <h2 class="font-black text-2xl">Skills</h2>
+    <ul class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-4">
+        {
+            skills.map(({name, experience}, index) => (
+                <li class={`text-left`}>
+                    <span class="block text-base font-semibold">{name}</span>
+                    <span class="block text-sm font-medium">{experience}</span>
+                </li>
+            ))
+        }
+    </ul>
+</section>

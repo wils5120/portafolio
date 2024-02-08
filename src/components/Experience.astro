@@ -1,5 +1,24 @@
 ---
+import { work } from "@cv";
+
+const works = work;
 
 ---
-
-<h1>Experiencias aca</h1>
+<div class="px-5 py-5">
+    <h1 class="font-black text-2xl">Experience</h1>
+    <div>
+        {
+            works.map(({name, position, url, startDate, endDate, summary}) => {
+                return(
+                    <div class="py-4">
+                        <h2 class="text-wrap text-2xl font-bold">{name}</h2>
+                        <p class="text-wrap text-lg font-semibold">{position}</p>
+                        <p class="text-base font-normal">{startDate} / {endDate} </p>
+                        <p class="text-base font-light">{summary}</p>
+                        <a class="text-sm font-light" href={url}>{url}</a>    
+                    </div>
+                )
+            })
+        }
+    </div>
+</div>

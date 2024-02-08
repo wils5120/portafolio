@@ -1,36 +1,43 @@
 ---
-import Layout from '@/layouts/Layout.astro';
+import Layout from "@/layouts/Layout.astro";
 
-import About from '@/components/About.astro';
-import Experience from '@/components/Experience.astro';
-import Education from '@/components/Education.astro';
-import Projects from '@/components/Projects.astro';
-import Hero from '@/components/Hero.astro';
-import Skills from '@/components/Skills.astro';
-import KeyboardManager from '@/components/KeyboardManager.astro';
+import About from "@/components/About.astro";
+import Experience from "@/components/Experience.astro";
+import Education from "@/components/Education.astro";
+import Projects from "@/components/Projects.astro";
+import Hero from "@/components/Hero.astro";
+import Skills from "@/components/Skills.astro";
+import KeyboardManager from "@/components/KeyboardManager.astro";
+
+import { basics } from "@cv";
+
+const { name, label } = basics;
+
 
 ---
 
-<Layout title="Porfolio.">
-	<main>
-		<Hero />
-		<About />
-		<Skills />
-		<Experience />
+<Layout title=`Porfolio de ${name} - ${label}`>
+  <main>
+    <Hero />
+    <About />
+    <div class="flex flex-row w-full px-5 py-5">
+      <div class="w-1/2 text-center">
+        <Skills />
+      </div>
+      <div class="w-1/2">
 		<Education />
-		<Projects />
-	</main>
-	<KeyboardManager />
+      </div>
+    </div>
+	<Experience />
+   <!--  <Projects /> -->
+  </main>
+  <KeyboardManager />
 </Layout>
 
 <style>
-	main {
-		margin: auto;
-		padding: 1rem;
-		width: 800px;
-		max-width: calc(100% - 2rem);
-		color: black;
-		font-size: 20px;
-		line-height: 1.6;
-	}
+  main {
+    color: black;
+    font-size: 20px;
+    line-height: 1.6;
+  }
 </style>

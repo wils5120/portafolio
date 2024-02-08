@@ -1,5 +1,22 @@
 ---
+import { education } from "@cv";
 
+const educations = education;
 ---
 
-<h1>Educacuibns</h1>
+<div>
+  <h2 class="font-black text-2xl text-center">Education</h2>
+  <div>
+    {
+      educations.map(({ institution, url, area, date }) => {
+        return (
+          <div class="pt-4 text-left">
+            <p class="text-xl font-semibold">{institution}</p>
+            <span class="block text-base font-medium">{area}</span>
+            <span class="block text-base font-medium">degree date {date} </span>
+          </div>
+        );
+      })
+    }
+  </div>
+</div>

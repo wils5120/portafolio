@@ -1,16 +1,156 @@
 ---
-import  { basics }  from '@cv'
+import { basics, languages } from "@cv";
 
-const { name, label, image, email, phone, url, summary, location } = basics
-const { region, city } = location
+import Email from "@/icons/Email.astro";
+import LinkedIn from "@/icons/Linkedin.astro";
+import Phone from "@/icons/Phone.astro";
+import GitHub from "@/icons/GitHub.astro";
+import World from "@/icons/World.astro";
+
+const { name, label, image, email, phone, location, profiles } = basics;
+const { region, city } = location;
+
+const SOCIAL_ICONS: Record<string, any> = {
+  GitHub,
+  LinkedIn,
+};
+
 
 ---
 
 <section>
-    <div class="container">
-        <div>
-            <h1>{name}</h1>
-            <h2>{label}</h2>
-        </div>
+  <div class="bg-black pt-5">
+    <div class="flex flex-col md:flex-row md:items-center text-center">
+      <!-- Contenedor del texto -->
+      <div class="md:w-1/2 md:ml-4 text-center">
+        <span
+          class="block text-3xl cursor-default text-center font-bold text-white whitespace-nowrap w-96 mx-auto custom-animation"
+          >{name}</span
+        >
+        <span class="block cursor-default text-base text-white whitespace-nowrap hidden-span mx-auto"
+          >{label}</span
+        >
+        <span class="block cursor-default text-sm text-white whitespace-nowrap  mx-auto hidden-span-city"
+          >{region} - {city}</span
+        >
+      </div>
+      <!-- Contenedor de la imagen -->
+      <div class="md:w-1/2 md:text-center md:pt-7 pt-7 justify-center pb-7">
+        <img
+          class="md:w-96 w-64 border border-gray-300 rounded-full mx-auto transition-transform duration-500 ease-in-out transform hover:scale-105"
+          src={image}
+          alt={name}
+        />
+      </div>
     </div>
+    <footer class="pb-7">
+      <div class="flex justify-center items-center space-x-4">
+        {
+          email && (
+            <a
+              href={`mailto:${email}`}
+              title={`Submit email to ${name} to ${email}`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Email />
+            </a>
+          )
+        }
+        {
+          phone && (
+            <a
+              href={`mailto:${phone}`}
+              title={`call to ${name} number ${phone}`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Phone />
+            </a>
+          )
+        }
+        {
+          profiles.map(({ network, url, username }) => {
+            const Icon = SOCIAL_ICONS[network];
+
+            return (
+              <a
+                href={url}
+                title={`network ${network} user ${username}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Icon />
+              </a>
+            );
+          })
+        }
+      </div>
+      <div class="pt-4">
+        {
+          languages.map(({ language, fluency, level }) => (
+            <div class="text-white flex text-sm text-center items-center justify-center cursor-default">
+              <World />
+              <span class="mx-1">{language}</span>
+              <span class="mx-1">{fluency}</span>
+              <span class="mx-1">{level}</span>
+            </div>
+          ))
+        }
+      </div>
+    </footer>
+  </div>
 </section>
+
+<style>
+  .custom-animation{
+    animation:
+      typing 3s steps(19),
+      blink 0.5s infinite step-end alternate;
+    overflow: hidden;
+  }
+
+  .hidden-span {
+    opacity: 0;
+    animation:typing 3s steps(65), blink 0.5s infinite step-end alternate;
+    animation-delay: 1.6s;
+    overflow: hidden;
+  }
+
+  .hidden-span-city{
+    opacity: 0;
+    animation:typing 4s steps(18), blink 1s infinite step-end alternate;
+    animation-delay: 3.4s;
+    overflow: hidden;
+  }
+
+
+  @keyframes typing {
+    from {
+      width: 0;
+      opacity: 1;
+    }
+    to {
+      width: 100%;
+      border-color: transparent;
+      opacity: 1;
+    }
+  }
+
+  @keyframes blink {
+    from,
+    50% {
+      border-color: transparent;
+      opacity: 1;
+    }
+  }
+
+  @keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+  }
+</style>
